@@ -2,12 +2,13 @@ name: Get and Cache Dependencies
 description: Install the dependencies (via npm) or cache them
 inputs:
   caching:
-    description: Whether to cache dependencies or not 
+    description: Whether to cache dependencies or not
     required: false
-    default: 'true'
+    default: "true"
 outputs:
-  description: Whether cache is used or not
-  value: ${{steps.install.outputs.cache}}
+  used-cache:
+    description: Whether cache is used or not
+    value: ${{steps.install.outputs.cache}}
 
 runs:
   using: composite
@@ -19,7 +20,7 @@ runs:
       with:
         path: node_modules
         key: deps-node-modules-${{hashFiles('**/package-lock.json')}}
-    
+
     - name: Install dependencies
       id: install
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
