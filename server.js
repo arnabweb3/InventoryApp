@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.get("/", (req, res) => {
-  res.send(`Inventory -> Server Running Successfully"!`);
+  res.send(`Inventory -> Server Running Successfully 👍"!`);
 });
 
 app.use("/api/users", userRoute);
