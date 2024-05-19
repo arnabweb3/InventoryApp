@@ -1,0 +1,30 @@
+name: Deploy Project to AWS EC2
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+
+      #   - name: Install NodeJS
+      #     uses: actions/setup-node@v4
+
+      #   - name: Load and cache dependencies
+      #     uses: ./.github/actions/cached-dev-deps
+      #     id: cache-deps
+      #     with:
+      #       caching: "true"
+
+      #   - name: Output cache dependencies result
+      #     run: echo "Cache used ? ${{steps.cache-deps.outputs.used-cache}}"
+
+      - name: List contents
+        run: ls
