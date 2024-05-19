@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/cached-dev-deps
         id: cache-deps
         with:
-        caching: "true"
+          caching: "true"
 
       - name: Output cache dependencies result
         run: echo "Cache used ? ${{steps.cache-deps.outputs.used-cache}}"
