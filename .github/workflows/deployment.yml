@@ -10,12 +10,18 @@ on:
 jobs:
   Deploy:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
       - name: Get Code
         uses: actions/checkout@v4
 
       - name: Install NodeJS
         uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: "npm"
 
       - name: Load and cache dependencies
         uses: ./.github/actions/cached-dev-deps
@@ -25,6 +31,14 @@ jobs:
 
       - name: Output cache dependencies result
         run: echo "Cache used ? ${{steps.cache-deps.outputs.used-cache}}"
+
+      - name: Upload environment variables
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_VARIABLES }}" > .env
+
+      - name: Restart pm2
+        run: pm2 restart Backend
 
       - name: List contents
         run: ls
