@@ -37,10 +37,5 @@ jobs:
           touch .env
           echo "${{ secrets.ENV_VARIABLES }}" > .env
 
-      - name: Export PM2 path
-        run: echo '/home/ec2-user/.nvm/versions/node/v18.20.2/bin' >> $GITHUB_ENV
-
       - name: Restart pm2
         run: pm2 restart Backend
-        env:
-            PATH: /home/ec2-user/.nvm/versions/node/v18.20.2/bin:$PATH
